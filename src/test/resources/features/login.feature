@@ -10,3 +10,4 @@ Feature: User Login
     And I enter "Password1" into the Password field
     And I click the Login button
     Then I should be redirected to the Home page
+    And I should see "Username12" in the top nav bar
