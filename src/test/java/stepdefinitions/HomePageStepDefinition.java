@@ -26,4 +26,10 @@ public class HomePageStepDefinition {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Home", 3);
         Assert.assertTrue(titleMatches);
     }
+
+    @Then("I should see {string} in the top nav bar")
+    public void i_should_see_in_the_top_nav_bar(String expectedUsername) {
+        System.out.println(homePage.getProfileUsername());
+        Assert.assertEquals(homePage.getProfileUsername(), expectedUsername);
+    }
 }
