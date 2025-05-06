@@ -9,6 +9,8 @@ public class TestContextSetup {
     public TestBase testBase;
     public PageObjectManager pageObjectManager;
     public GenericUtils genericUtils;
+    public String generatedUsername;
+    public String password;
 
     public TestContextSetup () throws IOException {
         testBase = new TestBase();
