@@ -8,7 +8,7 @@ Feature: User Registration
   @Happy
   Scenario: Successful user registration
     Given I am on the register page
-    And I fill in the registration form with the following details
+    And I fill in the registration form with a unique username and the following details
       | firstName | lastName | username  | password | confirmPassword |
       | John      | Doe      |Username   | Password1| Password1       |
     # Note: the actual username will have a random 5 digit number appended to the end for uniqueness

@@ -21,8 +21,8 @@ public class RegisterPageStepDefinition {
         this.registerPage = testContextSetup.pageObjectManager.getRegisterPage();
     }
 
-    @Given("I fill in the registration form with the following details")
-    public void i_fill_in_the_registration_form_with_the_following_details(DataTable dataTable) {
+    @Given("I fill in the registration form with a unique username and the following details")
+    public void i_fill_in_the_registration_form_with_a_unique_username_and_the_following_details(DataTable dataTable) {
         Map<String, String> formDetails = dataTable.asMaps().getFirst();
         String firstName = formDetails.get("firstName");
         String lastName = formDetails.get("lastName");
