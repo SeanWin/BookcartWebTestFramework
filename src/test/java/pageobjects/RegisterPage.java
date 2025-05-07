@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RegisterPage {
     By firstnameField = By.cssSelector("input[formcontrolname='firstName']");
@@ -18,6 +20,7 @@ public class RegisterPage {
     By femaleRadioButton = By.xpath("//input[@type='radio' and @value='Female']");
     By registerButton = By.xpath("//button[.//span[text()='Register']]");
     By toastLocator = By.cssSelector(".mat-mdc-snack-bar-label");
+    By errorFields = By.cssSelector("mat-error.mat-mdc-form-field-error");
 
     public WebDriver driver;
 
@@ -95,5 +98,12 @@ public class RegisterPage {
                 Thread.sleep(millisPerChar);
             } catch (InterruptedException ignored) { }
         }
+    }
+
+    public List<String> getAllErrorMessages() {
+        List<WebElement> errors = driver.findElements(errorFields);
+        return errors.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }
