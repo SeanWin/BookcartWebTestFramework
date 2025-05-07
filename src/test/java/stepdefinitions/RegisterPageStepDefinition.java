@@ -5,9 +5,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import pageobjects.RegisterPage;
 import utils.TestContextSetup;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -41,6 +43,23 @@ public class RegisterPageStepDefinition {
         registerPage.clickMaleRadioButton();
     }
 
+    @When("I fill in the registration form with the following details")
+    public void i_fill_in_registration_form_with_static_username(DataTable dataTable) {
+        Map<String, String> formDetails = dataTable.asMaps().getFirst();
+        String firstName = formDetails.get("firstName");
+        String lastName = formDetails.get("lastName");
+        String username = formDetails.get("username");
+        String password = formDetails.get("password");
+        String confirmPassword = formDetails.get("confirmPassword");
+
+        registerPage.enterFirstnameSlow(firstName);
+        registerPage.enterLastnameSlow(lastName);
+        registerPage.enterUsernameSlow(username);
+        registerPage.enterPasswordSlow(password);
+        registerPage.enterConfirmPasswordSlow(confirmPassword);
+        registerPage.clickMaleRadioButton();
+    }
+
     @When("I click the Register button")
     public void i_click_the_register_button() {
         registerPage.clickRegisterButton();
@@ -50,4 +69,15 @@ public class RegisterPageStepDefinition {
     public void i_should_see_the_successful_registration_toast() {
         Assert.assertEquals(registerPage.getToastMessage(), "Registration successful");
     }
+
+    @Then("I should see all relevant registration error messages")
+    public void i_should_see_all_error_messages() {
+        List<String> actualErrors = registerPage.getAllErrorMessages();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(actualErrors.contains("User Name is not available"));
+        softAssert.assertTrue(actualErrors.contains("Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"));
+        softAssert.assertTrue(actualErrors.contains("Password do not match"));
+        softAssert.assertAll();
+        }
 }
