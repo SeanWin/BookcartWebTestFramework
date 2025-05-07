@@ -7,6 +7,7 @@ public class LoginPage {
     By usernameField = By.cssSelector("input[formcontrolname='username']");
     By passwordField = By.cssSelector("input[formcontrolname='password']");
     By loginButton = By.xpath("//button[.//span[text()='Login']]");
+    By registerPageButton = By.xpath("//button[.//span[text()='Register']]");
 
     public WebDriver driver;
 
@@ -24,5 +25,9 @@ public class LoginPage {
 
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
+    }
+
+    public void clickRegisterPageButton() {
+        driver.findElement(registerPageButton).click();
     }
 }
