@@ -4,8 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
+import org.junit.Assert;
 import pageobjects.RegisterPage;
 import utils.TestContextSetup;
 
@@ -67,17 +66,15 @@ public class RegisterPageStepDefinition {
 
     @Then("I should see the successful registration toast")
     public void i_should_see_the_successful_registration_toast() {
-        Assert.assertEquals(registerPage.getToastMessage(), "Registration successful");
+        Assert.assertEquals("Registration successful", registerPage.getToastMessage());
     }
 
     @Then("I should see all relevant registration error messages")
     public void i_should_see_all_error_messages() {
         List<String> actualErrors = registerPage.getAllErrorMessages();
 
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(actualErrors.contains("User Name is not available"));
-        softAssert.assertTrue(actualErrors.contains("Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"));
-        softAssert.assertTrue(actualErrors.contains("Password do not match"));
-        softAssert.assertAll();
+        Assert.assertTrue(actualErrors.contains("User Name is not available"));
+        Assert.assertTrue(actualErrors.contains("Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"));
+        Assert.assertTrue(actualErrors.contains("Password do not match"));
         }
 }

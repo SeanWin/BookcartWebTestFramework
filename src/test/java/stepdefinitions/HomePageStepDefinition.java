@@ -2,7 +2,7 @@ package stepdefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.testng.Assert;
+import org.junit.Assert;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
 import utils.TestContextSetup;
