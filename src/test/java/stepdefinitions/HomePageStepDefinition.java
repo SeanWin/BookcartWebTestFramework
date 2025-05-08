@@ -1,33 +1,25 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pageobjects.HomePage;
-import pageobjects.LoginPage;
 import utils.TestContextSetup;
 
 public class HomePageStepDefinition {
 
     TestContextSetup testContextSetup;
     HomePage homePage;
-    LoginPage loginPage;
 
     public HomePageStepDefinition(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
         this.homePage = testContextSetup.pageObjectManager.getHomePage();
-        this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
     }
 
-    @Given("I am on the Login page")
-    public void i_am_on_the_login_page() {
-        homePage.clickLoginPageButton();
-    }
-
-    @Given("I am on the register page")
-    public void i_am_on_the_register_page() {
-        homePage.clickLoginPageButton();
-        loginPage.clickRegisterPageButton();
+    @When("I press the Logout button")
+    public void i_press_the_logout_button() {
+        homePage.clickProfileUsername();
+        homePage.clickLogoutButton();
     }
 
     @Then("I should be redirected to the Home page")
@@ -40,5 +32,10 @@ public class HomePageStepDefinition {
     public void i_should_see_in_the_top_nav_bar(String expectedUsername) {
         System.out.println(homePage.getProfileUsername());
         Assert.assertEquals(homePage.getProfileUsername(), expectedUsername);
+    }
+
+    @Then("the login page button is present")
+    public void the_login_page_button_is_present() {
+        Assert.assertTrue(homePage.isLoginButtonPagePresent());
     }
 }
