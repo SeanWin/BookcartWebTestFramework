@@ -1,0 +1,41 @@
+name: Run chrome tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  chrome-tests:
+    name: Chrome Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Check Chrome version
+        run: google-chrome --version
+
+      - name: Run Chrome tests
+        run: mvn test -Dbrowser=chrome
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-output
+          path: test-output
