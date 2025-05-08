@@ -1,0 +1,98 @@
+name: Run cross browser tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  chrome-tests:
+    name: Chrome Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Check Chrome version
+        run: google-chrome --version
+
+      - name: Run Chrome tests
+        run: mvn test -Dbrowser=chrome
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chrome-test-output
+          path: test-output
+
+  firefox-tests:
+    name: Firefox Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Set up Firefox
+        uses: browser-actions/setup-firefox@latest
+
+      - name: Check Check Firefox version
+        run: firefox --version
+
+      - name: Run Firefox tests
+        run: mvn test -Dbrowser=firefox
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-test-output
+          path: test-output
+
+  edge-tests:
+    name: Edge Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Set up Edge
+        uses: browser-actions/setup-edge@latest
+
+      - name: Run Edge tests
+        run: mvn test -Dbrowser=edge
+
+      - name: Upload test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: edge-test-output
+          path: test-output

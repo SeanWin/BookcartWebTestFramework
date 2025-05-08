@@ -35,6 +35,8 @@ public class TestBase {
                     options.addArguments("--disable-dev-shm-usage");
                     if (ci) {
                         options.addArguments("--headless");
+                        options.addArguments("--window-size=1920,1080");
+                        options.addArguments("--disable-gpu");
                     }
                     driver = new ChromeDriver(options);
                 }
@@ -42,6 +44,7 @@ public class TestBase {
                     FirefoxOptions options = new FirefoxOptions();
                     if (ci) {
                         options.addArguments("-headless");
+                        options.addArguments("--window-size=1920,1080");
                     }
                     driver = new FirefoxDriver(options);
                 }
@@ -51,6 +54,7 @@ public class TestBase {
                     options.addArguments("--disable-dev-shm-usage");
                     if (ci) {
                         options.addArguments("--headless");
+                        options.addArguments("--window-size=1920,1080");
                     }
                     driver = new EdgeDriver(options);
                 }
