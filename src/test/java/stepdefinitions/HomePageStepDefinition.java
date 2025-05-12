@@ -22,6 +22,16 @@ public class HomePageStepDefinition {
         homePage.clickLogoutButton();
     }
 
+    @When("I search for {string}")
+    public void i_search_for(String title) {
+        homePage.searchForBook(title);
+    }
+
+    @When("click on the book")
+    public void click_on_the_book() {
+        homePage.clickBook();
+    }
+
     @Then("I should be redirected to the Home page")
     public void i_should_be_redirected_to_the_home_page() {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Home", 3);
@@ -37,5 +47,11 @@ public class HomePageStepDefinition {
     @Then("the login page button is present")
     public void the_login_page_button_is_present() {
         Assert.assertTrue(homePage.isLoginButtonPagePresent());
+    }
+
+    @Then("no results are displayed in the drop down menu")
+    public void no_results_are_displayed_in_the_drop_down_menu() {
+        System.out.println(homePage.isHidden());
+        Assert.assertTrue(homePage.isHidden());
     }
 }
