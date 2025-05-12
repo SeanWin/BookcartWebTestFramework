@@ -68,6 +68,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
                 </configuration>
             </plugin>
         </plugins>

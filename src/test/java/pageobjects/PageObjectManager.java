@@ -8,6 +8,7 @@ public class PageObjectManager {
     public HomePage homePage;
     public LoginPage loginPage;
     public RegisterPage registerPage;
+    public BookDetailsPage bookDetailsPage;
 
     public PageObjectManager(WebDriver driver) {
         this.driver = driver;
@@ -26,5 +27,10 @@ public class PageObjectManager {
     public RegisterPage getRegisterPage() {
         registerPage = new RegisterPage(driver);
         return registerPage;
+    }
+
+    public BookDetailsPage getBookDetailsPage() {
+        bookDetailsPage = new BookDetailsPage(driver);
+        return bookDetailsPage;
     }
 }

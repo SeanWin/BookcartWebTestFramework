@@ -45,4 +45,9 @@ public class UserFlowStepDefinition {
 
 
     }
+
+    @Given("I am on the Home page")
+    public void i_am_on_the_home_page() {
+        testContextSetup.genericUtils.waitForTitle("Home", 3);
+    }
 }
