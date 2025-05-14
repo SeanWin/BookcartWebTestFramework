@@ -52,6 +52,16 @@ public class HomePageStepDefinition {
         homePage.clickMysteryCategory();
     }
 
+    @When("I click the Fantasy category button")
+    public void i_click_the_fantasy_category_button() {
+        homePage.clickFantasyCategory();
+    }
+
+    @When("I click the Romance category button")
+    public void i_click_the_romance_category_button() {
+        homePage.clickRomanceCategory();
+    }
+
     @When("I set the price filter to {int}")
     public void i_set_the_price_filter_to(Integer price) throws InterruptedException {
         Thread.sleep(2000);
@@ -95,5 +105,10 @@ public class HomePageStepDefinition {
     @Then("all books have an Add to Cart button")
     public void all_books_have_an_add_to_cart_button() {
         Assert.assertTrue(homePage.isAddToCartButtonPresentForAllBooks());
+    }
+
+    @Then("the No books found message is displayed")
+    public void the_no_books_found_message_is_displayed() {
+        Assert.assertEquals("No books found.", homePage.getNoBooksMessage());
     }
 }

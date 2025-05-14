@@ -19,10 +19,13 @@ public class HomePage {
     By biographyCategory = By.xpath("//mat-list-item//span[contains(text(), 'Biography')]");
     By fictionCategory = By.xpath("//mat-list-item//span[contains(text(), 'Fiction')]");
     By mysteryCategory = By.xpath("//mat-list-item//span[contains(text(), 'Mystery')]");
+    By fantasyCategory = By.xpath("//mat-list-item//span[contains(text(), 'Fantasy')]");
+    By romanceCategory = By.xpath("//mat-list-item//span[contains(text(), 'Romance')]");
     By books = By.cssSelector("app-book-card");
     By title = By.cssSelector("div.card-title strong");
     By addToCartButton = By.xpath(".//button[.//span[contains(normalize-space(), 'Add to Cart')]]");
     By price = By.cssSelector("mat-slider input[type='range']");
+    By noBooks = By.cssSelector("h1.display-4");
 
     public WebDriver driver;
 
@@ -75,6 +78,14 @@ public class HomePage {
         driver.findElement(mysteryCategory).click();
     }
 
+    public void clickFantasyCategory() {
+        driver.findElement(fantasyCategory).click();
+    }
+
+    public void clickRomanceCategory() {
+        driver.findElement(romanceCategory).click();
+    }
+
     public int countBooks() {
         return driver.findElements(books).size();
     }
@@ -89,26 +100,30 @@ public class HomePage {
         return bookTitles;
     }
 
-        public boolean isAddToCartButtonPresentForAllBooks() {
-            List<WebElement> bookCards = driver.findElements(books);
-            for (WebElement card : bookCards) {
-                if (!card.findElement(addToCartButton).isDisplayed()) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public void setPriceFilter(int targetValue) {
-            WebElement slider = driver.findElement(price);
-            driver.findElement(price).click();
-
-            int current = Integer.parseInt(slider.getAttribute("value"));
-            int min = Integer.parseInt(slider.getAttribute("min"));
-
-            while (current > targetValue && current > min) {
-                slider.sendKeys(Keys.ARROW_LEFT);
-                current = Integer.parseInt(slider.getAttribute("value"));
+    public boolean isAddToCartButtonPresentForAllBooks() {
+        List<WebElement> bookCards = driver.findElements(books);
+        for (WebElement card : bookCards) {
+            if (!card.findElement(addToCartButton).isDisplayed()) {
+                return false;
             }
         }
+        return true;
+    }
+
+    public void setPriceFilter(int targetValue) {
+        WebElement slider = driver.findElement(price);
+        driver.findElement(price).click();
+
+        int current = Integer.parseInt(slider.getAttribute("value"));
+        int min = Integer.parseInt(slider.getAttribute("min"));
+
+        while (current > targetValue && current > min) {
+            slider.sendKeys(Keys.ARROW_LEFT);
+            current = Integer.parseInt(slider.getAttribute("value"));
+        }
+    }
+
+    public String getNoBooksMessage() {
+        return driver.findElement(noBooks).getText();
+    }
 }
