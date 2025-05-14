@@ -1,6 +1,7 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -21,6 +22,7 @@ public class HomePage {
     By books = By.cssSelector("app-book-card");
     By title = By.cssSelector("div.card-title strong");
     By addToCartButton = By.xpath(".//button[.//span[contains(normalize-space(), 'Add to Cart')]]");
+    By price = By.cssSelector("mat-slider input[type='range']");
 
     public WebDriver driver;
 
@@ -77,8 +79,7 @@ public class HomePage {
         return driver.findElements(books).size();
     }
 
-    public List<String> getBookTitles() throws InterruptedException {
-        Thread.sleep(1000);
+    public List<String> getBookTitles() {
         List<String> bookTitles = new ArrayList<>();
         List<WebElement> bookCards = driver.findElements(books);
 
@@ -96,5 +97,18 @@ public class HomePage {
                 }
             }
             return true;
+        }
+
+        public void setPriceFilter(int targetValue) {
+            WebElement slider = driver.findElement(price);
+            driver.findElement(price).click();
+
+            int current = Integer.parseInt(slider.getAttribute("value"));
+            int min = Integer.parseInt(slider.getAttribute("min"));
+
+            while (current > targetValue && current > min) {
+                slider.sendKeys(Keys.ARROW_LEFT);
+                current = Integer.parseInt(slider.getAttribute("value"));
+            }
         }
 }

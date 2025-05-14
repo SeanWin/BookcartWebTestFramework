@@ -52,6 +52,12 @@ public class HomePageStepDefinition {
         homePage.clickMysteryCategory();
     }
 
+    @When("I set the price filter to {int}")
+    public void i_set_the_price_filter_to(Integer price) throws InterruptedException {
+        Thread.sleep(2000);
+        homePage.setPriceFilter(price);
+    }
+
     @Then("I should be redirected to the Home page")
     public void i_should_be_redirected_to_the_home_page() {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Home", 3);
@@ -82,6 +88,7 @@ public class HomePageStepDefinition {
 
     @Then("^the books have the following titles:$")
     public void the_books_have_the_following_titles(List<String> testData) throws InterruptedException {
+        Thread.sleep(1000);
         MatcherAssert.assertThat(homePage.getBookTitles(), is(testData));
     }
 
