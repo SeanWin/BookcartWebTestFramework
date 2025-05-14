@@ -101,3 +101,26 @@ Feature: Filter books
       |7/1/1993|
     And all books have an Add to Cart button
 
+  @Happy
+  @Category
+  @Price
+  Scenario: Filter books by category Fantasy and price 411
+    Given I am on the Home page
+    When I click the Fantasy category button
+    And I set the price filter to 411
+    Then 3 books are displayed
+    And the books have the following titles:
+      |Harry Potter and the Sorcerer's Stone|
+      |Marriage of Inconvenience|
+      |The Martian|
+    And all books have an Add to Cart button
+
+  @Sad
+  @Category
+  @Price
+  Scenario: Unsuccessfully filter books by category Romance and price 111
+    Given I am on the Home page
+    When I click the Romance category button
+    And I set the price filter to 111
+    Then the No books found message is displayed
+
