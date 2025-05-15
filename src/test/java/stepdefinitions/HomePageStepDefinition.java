@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.hamcrest.MatcherAssert;
@@ -19,6 +20,13 @@ public class HomePageStepDefinition {
     public HomePageStepDefinition(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
         this.homePage = testContextSetup.pageObjectManager.getHomePage();
+    }
+
+    @Given("I already have {string} in the cart")
+    public void iAlreadyHaveInTheCart(String title) throws InterruptedException {
+        i_search_for(title);
+        clickTheAddToCartButton();
+        homePage.clickHome();
     }
 
     @When("I press the Logout button")
@@ -68,6 +76,12 @@ public class HomePageStepDefinition {
         homePage.setPriceFilter(price);
     }
 
+    @When("click the Add to Cart button")
+    public void clickTheAddToCartButton() throws InterruptedException {
+        Thread.sleep(2000);
+        homePage.clickAddToCartButton();
+    }
+
     @Then("I should be redirected to the Home page")
     public void i_should_be_redirected_to_the_home_page() {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Home", 3);
@@ -110,5 +124,16 @@ public class HomePageStepDefinition {
     @Then("the No books found message is displayed")
     public void the_no_books_found_message_is_displayed() {
         Assert.assertEquals("No books found.", homePage.getNoBooksMessage());
+    }
+
+    @Then("I see the item added to cart successfully toast message")
+    public void iSeeTheItemAddedToCartSuccessfullyToastMessage() {
+        Assert.assertEquals("One Item added to cart", homePage.getToastMessage());
+    }
+
+    @Then("I see the cart icon badge shows {int}")
+    public void iSeeTheCartIconBadgeShows(int expectedQuantity) throws InterruptedException {
+        Thread.sleep(1000);
+        Assert.assertEquals(expectedQuantity, homePage.getCartQuantity());
     }
 }
