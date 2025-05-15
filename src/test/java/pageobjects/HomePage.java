@@ -1,7 +1,12 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePage {
     By loginPageButton = By.xpath("//button[.//span[text()=' Login ']]");
@@ -11,6 +16,16 @@ public class HomePage {
     By firstAutocompleteOption = By.cssSelector("mat-option[role='option']");
     By firstBookCoverImage = By.cssSelector("img[alt='Book cover image']");
     By autoCompletePanel = By.id("mat-autocomplete-0");
+    By biographyCategory = By.xpath("//mat-list-item//span[contains(text(), 'Biography')]");
+    By fictionCategory = By.xpath("//mat-list-item//span[contains(text(), 'Fiction')]");
+    By mysteryCategory = By.xpath("//mat-list-item//span[contains(text(), 'Mystery')]");
+    By fantasyCategory = By.xpath("//mat-list-item//span[contains(text(), 'Fantasy')]");
+    By romanceCategory = By.xpath("//mat-list-item//span[contains(text(), 'Romance')]");
+    By books = By.cssSelector("app-book-card");
+    By title = By.cssSelector("div.card-title strong");
+    By addToCartButton = By.xpath(".//button[.//span[contains(normalize-space(), 'Add to Cart')]]");
+    By price = By.cssSelector("mat-slider input[type='range']");
+    By noBooks = By.cssSelector("h1.display-4");
 
     public WebDriver driver;
 
@@ -49,5 +64,66 @@ public class HomePage {
 
     public boolean isHidden() {
         return driver.findElement(autoCompletePanel).getAttribute("class").contains("mat-mdc-autocomplete-hidden");
+    }
+
+    public void clickBiographyCategory() {
+        driver.findElement(biographyCategory).click();
+    }
+
+    public void clickFictionCategory() {
+        driver.findElement(fictionCategory).click();
+    }
+
+    public void clickMysteryCategory() {
+        driver.findElement(mysteryCategory).click();
+    }
+
+    public void clickFantasyCategory() {
+        driver.findElement(fantasyCategory).click();
+    }
+
+    public void clickRomanceCategory() {
+        driver.findElement(romanceCategory).click();
+    }
+
+    public int countBooks() {
+        return driver.findElements(books).size();
+    }
+
+    public List<String> getBookTitles() {
+        List<String> bookTitles = new ArrayList<>();
+        List<WebElement> bookCards = driver.findElements(books);
+
+        for (WebElement card : bookCards) {
+            bookTitles.add(card.findElement(title).getText().trim());
+        }
+        return bookTitles;
+    }
+
+    public boolean isAddToCartButtonPresentForAllBooks() {
+        List<WebElement> bookCards = driver.findElements(books);
+        for (WebElement card : bookCards) {
+            if (!card.findElement(addToCartButton).isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setPriceFilter(int targetValue) {
+        WebElement slider = driver.findElement(price);
+        driver.findElement(price).click();
+
+        int current = Integer.parseInt(slider.getAttribute("value"));
+        int min = Integer.parseInt(slider.getAttribute("min"));
+
+        while (current > targetValue && current > min) {
+            slider.sendKeys(Keys.ARROW_LEFT);
+            current = Integer.parseInt(slider.getAttribute("value"));
+        }
+    }
+
+    public String getNoBooksMessage() {
+        return driver.findElement(noBooks).getText();
     }
 }
