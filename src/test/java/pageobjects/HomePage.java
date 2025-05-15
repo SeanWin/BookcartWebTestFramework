@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,10 @@ public class HomePage {
     By addToCartButton = By.xpath(".//button[.//span[contains(normalize-space(), 'Add to Cart')]]");
     By price = By.cssSelector("mat-slider input[type='range']");
     By noBooks = By.cssSelector("h1.display-4");
+    By toastLocator = By.cssSelector(".mat-mdc-snack-bar-label");
+    By cartQuantity = By.id("mat-badge-content-0");
+    By home = By.cssSelector(".brand-title button");
+    By cart = By.xpath("//button[.//mat-icon[contains(text(),'shopping_cart')]]");
 
     public WebDriver driver;
 
@@ -125,5 +132,28 @@ public class HomePage {
 
     public String getNoBooksMessage() {
         return driver.findElement(noBooks).getText();
+    }
+
+    public void clickAddToCartButton() {
+        driver.findElement(firstAutocompleteOption).click();
+        driver.findElement(addToCartButton).click();
+    }
+
+    public String getToastMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement toast = wait.until(ExpectedConditions.visibilityOfElementLocated(toastLocator));
+        return toast.getText().trim();
+    }
+
+    public int getCartQuantity() {
+        return Integer.parseInt(driver.findElement(cartQuantity).getText());
+    }
+
+    public void clickHome() {
+        driver.findElement(home).click();
+    }
+
+    public void clickCartButton() {
+        driver.findElement(cart).click();
     }
 }
