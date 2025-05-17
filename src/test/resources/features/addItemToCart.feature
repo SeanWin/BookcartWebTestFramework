@@ -6,6 +6,7 @@ Feature: Add item to cart
   So that I can prepare items for purchase.
 
   @Happy
+  @ClearCart
   Scenario: Add one book to the cart
     Given I am on the Home page
     When I search for "Roomies"
@@ -14,6 +15,7 @@ Feature: Add item to cart
     And I see the cart icon badge shows 1
 
   @Happy
+  @ClearCart
   Scenario: Add multiple items to the cart - 2 books
     Given I already have "Rot & Ruin" in the cart
     And I am on the Home page
@@ -23,6 +25,7 @@ Feature: Add item to cart
     And I see the cart icon badge shows 2
 
   @Happy
+  @ClearCart
   Scenario: Add multiple items to the cart - 3 books
     Given I already have "Rot & Ruin" in the cart
     Given I already have "Slayer" in the cart
