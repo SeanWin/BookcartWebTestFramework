@@ -12,6 +12,7 @@ public class ShoppingCartPage {
     By quantity = By.cssSelector("td.mat-column-quantity > div > div:nth-child(2)");
     By total = By.cssSelector("td.mat-column-total");
     By checkoutButton = By.cssSelector("td.mat-column-action button span.mdc-button__label");
+    By clearButtonButton = By.xpath("//button[.//span[text()=' Clear cart ']]");
 
     public WebDriver driver;
 
@@ -53,5 +54,9 @@ public class ShoppingCartPage {
 
     public String getCheckoutButtonText() {
         return driver.findElement(checkoutButton).getText();
+    }
+
+    public void clickClearButtonButton() {
+        driver.findElement(clearButtonButton).click();
     }
 }
