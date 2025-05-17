@@ -6,6 +6,7 @@ Feature: View cart contents
   So that I can review what I’ve selected.
 
   @Happy
+  @ClearCart
   Scenario: View cart contents - one book
     Given I already have "The Hookup" in the cart
     When I press the cart icon
@@ -16,6 +17,7 @@ Feature: View cart contents
     And the checkout button is present
 
   @Happy
+  @ClearCart
   Scenario: View cart contents - two books
     Given I already have "The Hookup" in the cart
     Given I already have "Slayer" in the cart
