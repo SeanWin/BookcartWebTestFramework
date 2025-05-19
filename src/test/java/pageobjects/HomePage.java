@@ -1,9 +1,6 @@
 package pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -136,7 +133,16 @@ public class HomePage {
 
     public void clickAddToCartButton() {
         driver.findElement(firstAutocompleteOption).click();
-        driver.findElement(addToCartButton).click();
+        int attempts = 0;
+        while(attempts < 2) {
+            try {
+                WebElement addToCartElement = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartButton));
+                addToCartElement.click();
+                return;
+            } catch (StaleElementReferenceException e) {
+                attempts ++;
+            }
+        }
     }
 
     public String getToastMessage() {
