@@ -31,6 +31,7 @@ public class RegisterPageStepDefinition {
         String password = formDetails.get("password");
         String confirmPassword = formDetails.get("confirmPassword");
         String uniqueUsername = username + String.format("%05d", new Random().nextInt(100000));
+        System.out.println("*******"+uniqueUsername+"********");
         testContextSetup.generatedUsername = uniqueUsername;
         testContextSetup.password = password;
 
