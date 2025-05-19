@@ -133,16 +133,7 @@ public class HomePage {
 
     public void clickAddToCartButton() {
         driver.findElement(firstAutocompleteOption).click();
-        int attempts = 0;
-        while(attempts < 2) {
-            try {
-                WebElement addToCartElement = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(addToCartButton));
-                addToCartElement.click();
-                return;
-            } catch (StaleElementReferenceException e) {
-                attempts ++;
-            }
-        }
+        driver.findElement(addToCartButton).click();
     }
 
     public String getToastMessage() {
