@@ -50,4 +50,9 @@ public class UserFlowStepDefinition {
     public void i_am_on_the_home_page() {
         testContextSetup.genericUtils.waitForTitle("Home", 3);
     }
+
+    @Given("I am on the Shopping Cart page")
+    public void i_am_on_the_shopping_cart_page() {
+        homePage.clickCartButton();
+    }
 }
