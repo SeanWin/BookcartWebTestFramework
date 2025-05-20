@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pageobjects.HomePage;
 import pageobjects.WishlistPage;
@@ -18,6 +19,18 @@ public class WishlistPageStepDefinition {
         this.wishlistPage = testContextSetup.pageObjectManager.getWishlistPage();
     }
 
+    @When("I click the Remove from Wishlist button for {string}")
+    public void iClickTheRemoveFromWishlistButtonFor(String title) throws InterruptedException {
+        Thread.sleep(3500);
+        wishlistPage.clickRemoveFromWishlistButtonForBook(title);
+    }
+
+    @When("I click the Clear Wishlist button")
+    public void iClickTheClearWishlistButton() throws InterruptedException {
+        Thread.sleep(3500);
+        wishlistPage.clickClearWishlistButton();
+    }
+
     @Then("validate that the book title in the wishlist page matches with home page")
     public void validateThatTheBookTitleInTheWishlistPageMatchesWithHomePage() {
         homePage.clickWishlistPageButton();
@@ -28,5 +41,15 @@ public class WishlistPageStepDefinition {
     public void validateThatTheBookTitleInTheWishlistPageMatchesWithBookDetailsPage() {
         homePage.clickWishlistPageButton();
         Assert.assertEquals(testContextSetup.bookDetailsPageBookTitle, wishlistPage.getTitle());
+    }
+
+    @Then("I should see the Removed from Wishlist!!! toast message")
+    public void iShouldSeeTheRemovedFromWishlistToastMessage() {
+        Assert.assertEquals("Removed from Wishlist!!!", wishlistPage.getToastMessage());
+    }
+
+    @Then("I should see the Wishlist cleared!!! toast message")
+    public void iShouldSeeTheWishlistClearedToastMessage() {
+        Assert.assertEquals("Wishlist cleared!!!", wishlistPage.getToastMessage());
     }
 }
