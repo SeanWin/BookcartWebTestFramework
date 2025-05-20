@@ -107,9 +107,9 @@ public class ShoppingCartPageStepDefinition {
         Assert.assertEquals("Book removed from cart", shoppingCartPage.getToastMessage());
     }
 
-    @Then("I should see the empty cart screen message")
-    public void iShouldSeeTheEmptyCartScreenMessage() {
-        Assert.assertEquals("Your shopping cart is empty.", shoppingCartPage.getEmptyCartMessage());
+    @Then("I should see the {string} message on the screen")
+    public void iShouldSeeTheMessageOnTheScreen(String expectedMessage) {
+        Assert.assertEquals(expectedMessage, shoppingCartPage.getEmptyCartMessage());
     }
 
     @Then("the Continue shopping button is visible")
