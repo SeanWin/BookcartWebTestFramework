@@ -14,6 +14,7 @@ public class WishlistPage {
     By toastLocator = By.cssSelector(".mat-mdc-snack-bar-label");
     String bookRow = "//tr[.//td[contains(@class,'mat-column-title')]//a[normalize-space()='%s']]";
     By removeFromWishlistButton = By.xpath(".//button[.//span[normalize-space()='Remove from Wishlist']]");
+    By addToCartButton = By.xpath(".//button[.//span[normalize-space()='Add to Cart']]");
 
     public WebDriver driver;
 
@@ -41,5 +42,9 @@ public class WishlistPage {
 
     public void clickRemoveFromWishlistButtonForBook(String title) {
         driver.findElement(bookRowLocator(title)).findElement(removeFromWishlistButton).click();
+    }
+
+    public void clickAddToCartButtonForBook(String title) {
+        driver.findElement(bookRowLocator(title)).findElement(addToCartButton).click();
     }
 }
