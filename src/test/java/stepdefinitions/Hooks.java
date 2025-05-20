@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import pageobjects.HomePage;
 import pageobjects.ShoppingCartPage;
+import pageobjects.WishlistPage;
 import utils.TestContextSetup;
 
 import java.io.File;
@@ -18,11 +19,13 @@ public class Hooks {
     TestContextSetup testContextSetup;
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
+    WishlistPage wishlistPage;
 
     public Hooks(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
         this.homePage = testContextSetup.pageObjectManager.getHomePage();
         this.shoppingCartPage = testContextSetup.pageObjectManager.getShoppingCartPage();
+        this.wishlistPage = testContextSetup.pageObjectManager.getWishlistPage();
     }
 
     @After(order = 1)
@@ -45,5 +48,12 @@ public class Hooks {
         homePage.clickCartButton();
         Thread.sleep(2000);
         shoppingCartPage.clickClearButtonButton();
+    }
+
+    @After(value = "@ClearWishlist", order = 3)
+    public void clearWishlistAfter() throws InterruptedException {
+        homePage.clickWishlistPageButton();
+        Thread.sleep(2000);
+        wishlistPage.clickClearWishlistButton();
     }
 }
