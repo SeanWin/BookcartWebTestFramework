@@ -87,6 +87,12 @@ public class HomePageStepDefinition {
         homePage.clickCartButton();
     }
 
+    @When("I click the heart icon")
+    public void iClickTheHeartIcon() throws InterruptedException {
+        Thread.sleep(2000);
+        homePage.clickWishlistIcon();
+    }
+
     @Then("I should be redirected to the Home page")
     public void i_should_be_redirected_to_the_home_page() {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Home", 3);
@@ -140,5 +146,16 @@ public class HomePageStepDefinition {
     public void iSeeTheCartIconBadgeShows(int expectedQuantity) throws InterruptedException {
         Thread.sleep(1000);
         Assert.assertEquals(expectedQuantity, homePage.getCartQuantity());
+    }
+
+    @Then("I should see the Added to Wishlist!!! toast message")
+    public void iShouldSeeTheAddedToWishlistToastMessage() {
+        Assert.assertEquals("Added to Wishlist!!!", homePage.getToastMessage());
+    }
+
+    @Then("I see the heart icon badge shows {int}")
+    public void iSeeTheHeartIconBadgeShows(int expectedQuantity) throws InterruptedException {
+        Thread.sleep(1000);
+        Assert.assertEquals(expectedQuantity, homePage.getWishlistQuantity());
     }
 }
