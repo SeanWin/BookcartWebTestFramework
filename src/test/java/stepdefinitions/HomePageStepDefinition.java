@@ -91,6 +91,7 @@ public class HomePageStepDefinition {
     public void iClickTheHeartIcon() throws InterruptedException {
         Thread.sleep(2000);
         homePage.clickWishlistIcon();
+        testContextSetup.homePageBookTitle = homePage.getBookTitle();
     }
 
     @Then("I should be redirected to the Home page")

@@ -11,6 +11,7 @@ public class TestContextSetup {
     public GenericUtils genericUtils;
     public String generatedUsername;
     public String password;
+    public String homePageBookTitle;
 
     public TestContextSetup () throws IOException {
         testBase = new TestBase();
