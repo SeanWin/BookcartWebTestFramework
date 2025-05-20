@@ -31,6 +31,13 @@ public class WishlistPageStepDefinition {
         wishlistPage.clickClearWishlistButton();
     }
 
+    @When("I click the Add to Cart button for {string}")
+    public void iClickTheAddToCartButtonFor(String title) throws InterruptedException {
+        Thread.sleep(3500);
+        wishlistPage.clickAddToCartButtonForBook(title);
+        testContextSetup.wishlistPageBookTitle = wishlistPage.getTitle();
+    }
+
     @Then("validate that the book title in the wishlist page matches with home page")
     public void validateThatTheBookTitleInTheWishlistPageMatchesWithHomePage() {
         homePage.clickWishlistPageButton();

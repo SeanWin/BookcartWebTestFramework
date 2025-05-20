@@ -13,6 +13,7 @@ public class TestContextSetup {
     public String password;
     public String homePageBookTitle;
     public String bookDetailsPageBookTitle;
+    public String wishlistPageBookTitle;
 
     public TestContextSetup () throws IOException {
         testBase = new TestBase();
