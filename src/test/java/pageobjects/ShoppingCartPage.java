@@ -109,4 +109,8 @@ public class ShoppingCartPage {
     public boolean isContinueShoppingButtonPresent() {
         return !driver.findElements(continueShoppingButton).isEmpty();
     }
+
+    public String getTitle() {
+        return driver.findElement(title).getText();
+    }
 }
