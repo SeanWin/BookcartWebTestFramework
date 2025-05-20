@@ -29,6 +29,12 @@ public class HomePageStepDefinition {
         homePage.clickHome();
     }
 
+    @Given("I am on the Book Details page for {string}")
+    public void iAmOnTheBookDetailsPageFor(String title) {
+        i_search_for(title);
+        click_on_the_book();
+    }
+
     @When("I press the Logout button")
     public void i_press_the_logout_button() {
         homePage.clickProfileUsername();
