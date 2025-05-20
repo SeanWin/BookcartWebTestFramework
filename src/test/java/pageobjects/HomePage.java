@@ -32,6 +32,7 @@ public class HomePage {
     By cart = By.xpath("//button[.//mat-icon[contains(text(),'shopping_cart')]]");
     By wishlistIcon = By.xpath("//span[contains(@class, 'favourite-unselected') and normalize-space()='favorite']");
     By wishlistQuantity = By.id("mat-badge-content-1");
+    By wishlist = By.xpath("//button[.//mat-icon[contains(text(),'favorite')]]");
 
     public WebDriver driver;
 
@@ -163,5 +164,13 @@ public class HomePage {
 
     public int getWishlistQuantity() {
         return Integer.parseInt(driver.findElement(wishlistQuantity).getText());
+    }
+
+    public void clickWishlistPageButton() {
+        driver.findElement(wishlist).click();
+    }
+
+    public String getBookTitle() {
+        return driver.findElement(title).getText();
     }
 }
