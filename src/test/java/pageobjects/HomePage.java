@@ -30,6 +30,8 @@ public class HomePage {
     By cartQuantity = By.id("mat-badge-content-0");
     By home = By.cssSelector(".brand-title button");
     By cart = By.xpath("//button[.//mat-icon[contains(text(),'shopping_cart')]]");
+    By wishlistIcon = By.xpath("//span[contains(@class, 'favourite-unselected') and normalize-space()='favorite']");
+    By wishlistQuantity = By.id("mat-badge-content-1");
 
     public WebDriver driver;
 
@@ -152,5 +154,14 @@ public class HomePage {
 
     public void clickCartButton() {
         driver.findElement(cart).click();
+    }
+
+    public void clickWishlistIcon() {
+        driver.findElement(firstAutocompleteOption).click();
+        driver.findElement(wishlistIcon).click();
+    }
+
+    public int getWishlistQuantity() {
+        return Integer.parseInt(driver.findElement(wishlistQuantity).getText());
     }
 }
