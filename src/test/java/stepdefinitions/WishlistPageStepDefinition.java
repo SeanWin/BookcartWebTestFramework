@@ -23,4 +23,10 @@ public class WishlistPageStepDefinition {
         homePage.clickWishlistPageButton();
         Assert.assertEquals(testContextSetup.homePageBookTitle, wishlistPage.getTitle());
     }
+
+    @Then("validate that the book title in the wishlist page matches with book details page")
+    public void validateThatTheBookTitleInTheWishlistPageMatchesWithBookDetailsPage() {
+        homePage.clickWishlistPageButton();
+        Assert.assertEquals(testContextSetup.bookDetailsPageBookTitle, wishlistPage.getTitle());
+    }
 }
