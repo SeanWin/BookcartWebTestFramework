@@ -12,6 +12,7 @@ public class TestContextSetup {
     public String generatedUsername;
     public String password;
     public String homePageBookTitle;
+    public String bookDetailsPageBookTitle;
 
     public TestContextSetup () throws IOException {
         testBase = new TestBase();
