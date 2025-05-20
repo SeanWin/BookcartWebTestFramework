@@ -35,6 +35,13 @@ public class HomePageStepDefinition {
         click_on_the_book();
     }
 
+    @Given("I have {string} in my wishlist")
+    public void iHaveInMyWishlist(String title) throws InterruptedException {
+        i_search_for(title);
+        iClickTheHeartIcon();
+        homePage.clickHome();
+    }
+
     @When("I press the Logout button")
     public void i_press_the_logout_button() {
         homePage.clickProfileUsername();
