@@ -55,4 +55,9 @@ public class UserFlowStepDefinition {
     public void i_am_on_the_shopping_cart_page() {
         homePage.clickCartButton();
     }
+
+    @Given("I am on the Wishlist page")
+    public void iAmOnTheWishlistPage() {
+        homePage.clickWishlistPageButton();
+    }
 }
