@@ -15,7 +15,7 @@ public class ShoppingCartPage {
     By quantity = By.cssSelector("td.mat-column-quantity > div > div:nth-child(2)");
     By total = By.cssSelector("td.mat-column-total");
     By checkoutButton = By.cssSelector("td.mat-column-action button span.mdc-button__label");
-    By clearButtonButton = By.xpath("//button[.//span[text()=' Clear cart ']]");
+    By clearButton = By.xpath("//button[.//span[text()=' Clear cart ']]");
     By decrementButton = By.xpath("//mat-icon[normalize-space()='remove_circle']/ancestor::button");
     By incrementButton = By.xpath("//mat-icon[normalize-space()='add_circle']/ancestor::button");
     By toastLocator = By.cssSelector(".mat-mdc-snack-bar-label");
@@ -68,8 +68,8 @@ public class ShoppingCartPage {
         return driver.findElement(checkoutButton).getText();
     }
 
-    public void clickClearButtonButton() {
-        driver.findElement(clearButtonButton).click();
+    public void clickClearButton() {
+        driver.findElement(clearButton).click();
     }
 
     public void clickDecrementButton() {
@@ -112,5 +112,13 @@ public class ShoppingCartPage {
 
     public String getTitle() {
         return driver.findElement(title).getText();
+    }
+
+    public By getClearButtonLocator() {
+        return clearButton;
+    }
+
+    public By getEmptyCartMessageLocator() {
+        return emptyCartMessage;
     }
 }
