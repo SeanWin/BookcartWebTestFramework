@@ -47,4 +47,8 @@ public class WishlistPage {
     public void clickAddToCartButtonForBook(String title) {
         driver.findElement(bookRowLocator(title)).findElement(addToCartButton).click();
     }
+
+    public By getClearWishlistButtonLocator() {
+        return clearWishlistButton;
+    }
 }
