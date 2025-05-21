@@ -56,9 +56,11 @@ public class Hooks {
     }
 
     @After(value = "@ClearWishlist", order = 3)
-    public void clearWishlistAfter() throws InterruptedException {
+    public void clearWishlistAfter() throws IOException {
         homePage.clickWishlistPageButton();
-        Thread.sleep(2000);
-        wishlistPage.clickClearWishlistButton();
+        WebDriverWait wait = new WebDriverWait(testContextSetup.testBase.webDriverManager(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(wishlistPage.getClearWishlistButtonLocator()));
+        wait.until(ExpectedConditions.elementToBeClickable(wishlistPage.getClearWishlistButtonLocator())).click();
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(shoppingCartPage.getEmptyCartMessageLocator(), "Your wishlist is empty."));
     }
 }
