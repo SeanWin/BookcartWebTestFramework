@@ -10,6 +10,7 @@ public class BookDetailsPage {
     By price = By.xpath("//td[strong[text()='Price']]/following-sibling::td");
     By addToCartButton = By.xpath("//button[.//span[text()[normalize-space()='Add to Cart']]]");
     By similarBooks = By.xpath("//app-similarbooks//app-book-card");
+    By addToWishlistButton = By.xpath("//button[.//span[text()[normalize-space()='Add to Wishlist']]]");
 
     public WebDriver driver;
 
@@ -39,5 +40,9 @@ public class BookDetailsPage {
 
     public boolean isSimilarBooksListPresent() {
         return !driver.findElements(similarBooks).isEmpty();
+    }
+
+    public void clickAddToWishlistButton() {
+        driver.findElement(addToWishlistButton).click();
     }
 }

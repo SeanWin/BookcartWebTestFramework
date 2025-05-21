@@ -5,6 +5,10 @@ Feature: Add item to cart
   I want to add a book to my cart
   So that I can prepare items for purchase.
 
+  Background:
+    # Comment out the below line to run tests logged out
+    Given I am logged in with username "Username85851" and password "Password1"
+
   @Happy
   @ClearCart
   Scenario: Add one book to the cart

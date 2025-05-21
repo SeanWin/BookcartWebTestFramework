@@ -10,6 +10,7 @@ public class PageObjectManager {
     public RegisterPage registerPage;
     public BookDetailsPage bookDetailsPage;
     public ShoppingCartPage shoppingCartPage;
+    public WishlistPage wishlistPage;
 
     public PageObjectManager(WebDriver driver) {
         this.driver = driver;
@@ -38,5 +39,10 @@ public class PageObjectManager {
     public ShoppingCartPage getShoppingCartPage() {
         shoppingCartPage = new ShoppingCartPage(driver);
         return shoppingCartPage;
+    }
+
+    public WishlistPage getWishlistPage() {
+        wishlistPage = new WishlistPage(driver);
+        return wishlistPage;
     }
 }

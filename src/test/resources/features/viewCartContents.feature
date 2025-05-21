@@ -5,6 +5,10 @@ Feature: View cart contents
   I want to see my cart
   So that I can review what I’ve selected.
 
+  Background:
+    # Comment out the below line to run tests logged out
+    Given I am logged in with username "Username50785" and password "Password1"
+
   @Happy
   @ClearCart
   Scenario: View cart contents - one book

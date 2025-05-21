@@ -37,7 +37,7 @@ Feature: Update cart
     And I am on the Shopping Cart page
     When I click the Delete item button for "The Chosen"
     Then I see the Book removed from cart toast message
-    And I should see the empty cart screen message
+    And I should see the "Your shopping cart is empty." message on the screen
     And the Continue shopping button is visible
 
   @ClearCart
@@ -78,5 +78,5 @@ Feature: Update cart
     And I am on the Shopping Cart page
     When I click the Clear cart button
     Then I see the Cart cleared toast message
-    And I should see the empty cart screen message
+    And I should see the "Your shopping cart is empty." message on the screen
     And the Continue shopping button is visible

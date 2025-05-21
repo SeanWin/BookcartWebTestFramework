@@ -4,6 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import pageobjects.HomePage;
 import pageobjects.ShoppingCartPage;
 import utils.TestContextSetup;
 
@@ -14,10 +15,12 @@ public class ShoppingCartPageStepDefinition {
 
     TestContextSetup testContextSetup;
     ShoppingCartPage shoppingCartPage;
+    HomePage homePage;
 
     public ShoppingCartPageStepDefinition(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
         this.shoppingCartPage = testContextSetup.pageObjectManager.getShoppingCartPage();
+        this.homePage = testContextSetup.pageObjectManager.getHomePage();
     }
 
     @When("I click the decrement button")
@@ -41,7 +44,7 @@ public class ShoppingCartPageStepDefinition {
     @When("I click the Clear cart button")
     public void iClickTheClearCartButton() throws InterruptedException {
         Thread.sleep(3500);
-        shoppingCartPage.clickClearButtonButton();
+        shoppingCartPage.clickClearButton();
     }
 
     @Then("I should be redirected to the Shopping Cart page")
@@ -107,9 +110,9 @@ public class ShoppingCartPageStepDefinition {
         Assert.assertEquals("Book removed from cart", shoppingCartPage.getToastMessage());
     }
 
-    @Then("I should see the empty cart screen message")
-    public void iShouldSeeTheEmptyCartScreenMessage() {
-        Assert.assertEquals("Your shopping cart is empty.", shoppingCartPage.getEmptyCartMessage());
+    @Then("I should see the {string} message on the screen")
+    public void iShouldSeeTheMessageOnTheScreen(String expectedMessage) {
+        Assert.assertEquals(expectedMessage, shoppingCartPage.getEmptyCartMessage());
     }
 
     @Then("the Continue shopping button is visible")
@@ -120,5 +123,11 @@ public class ShoppingCartPageStepDefinition {
     @Then("I see the Cart cleared toast message")
     public void iSeeTheCartClearedToastMessage() {
         Assert.assertEquals("Cart cleared", shoppingCartPage.getToastMessage());
+    }
+
+    @Then("validate that the book title in the cart page matches with wishlist page")
+    public void validateThatTheBookTitleInTheCartPageMatchesWithWishlistPage() {
+        homePage.clickCartButton();
+        Assert.assertEquals(testContextSetup.wishlistPageBookTitle, shoppingCartPage.getTitle());
     }
 }
