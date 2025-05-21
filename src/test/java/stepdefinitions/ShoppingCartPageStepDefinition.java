@@ -44,7 +44,7 @@ public class ShoppingCartPageStepDefinition {
     @When("I click the Clear cart button")
     public void iClickTheClearCartButton() throws InterruptedException {
         Thread.sleep(3500);
-        shoppingCartPage.clickClearButtonButton();
+        shoppingCartPage.clickClearButton();
     }
 
     @Then("I should be redirected to the Shopping Cart page")
