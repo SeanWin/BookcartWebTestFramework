@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import org.junit.Assert;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
+import pageobjects.ShoppingCartPage;
 import utils.TestContextSetup;
 
 public class UserFlowStepDefinition {
@@ -11,11 +12,13 @@ public class UserFlowStepDefinition {
     TestContextSetup testContextSetup;
     HomePage homePage;
     LoginPage loginPage;
+    ShoppingCartPage shoppingCartPage;
 
     public UserFlowStepDefinition(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
         this.homePage = testContextSetup.pageObjectManager.getHomePage();
         this.loginPage = testContextSetup.pageObjectManager.getLoginPage();
+        this.shoppingCartPage = testContextSetup.pageObjectManager.getShoppingCartPage();
     }
 
     @Given("I am on the Login page")
@@ -59,5 +62,13 @@ public class UserFlowStepDefinition {
     @Given("I am on the Wishlist page")
     public void iAmOnTheWishlistPage() {
         homePage.clickWishlistPageButton();
+    }
+
+    @Given("I am on the Checkout page")
+    public void iAmOnTheCheckoutPage() {
+        homePage.clickCartButton();
+        shoppingCartPage.clickCheckoutButton();
+        boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Checkout", 3);
+        Assert.assertTrue(titleMatches);
     }
 }
