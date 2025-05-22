@@ -11,6 +11,7 @@ public class PageObjectManager {
     public BookDetailsPage bookDetailsPage;
     public ShoppingCartPage shoppingCartPage;
     public WishlistPage wishlistPage;
+    public CheckoutPage checkoutPage;
 
     public PageObjectManager(WebDriver driver) {
         this.driver = driver;
@@ -44,5 +45,10 @@ public class PageObjectManager {
     public WishlistPage getWishlistPage() {
         wishlistPage = new WishlistPage(driver);
         return wishlistPage;
+    }
+
+    public CheckoutPage getCheckoutPage() {
+        checkoutPage = new CheckoutPage(driver);
+        return checkoutPage;
     }
 }
