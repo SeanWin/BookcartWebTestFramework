@@ -9,7 +9,7 @@ Additionally, the tests can be run in various browsers including chrome, firefox
 
 -  **Cucumber Integration** – Enables BDD-style testing and readable scenarios for cross-team collaboration
 -  **Data-Driven Testing** – Supports parameterised test cases to handle multiple input variations
--  **Selenium** – For implementing automated web tests
+-  **Selenium WebDriver** – For implementing automated web tests
 -  **JUnit** – For test execution and lifecycle management
 -  **Automated Test Reporting** – Generates cucumber Extent reports
 -  **GitHub Actions Integration** – Automatically runs tests and uploads reports as build artifacts
@@ -51,7 +51,7 @@ Cucumber Extent reports are generated automatically under `test-output/` folder
 
 ## CI Integration
 This framework is integrated with GitHub Actions.
-You can trigger it manually via the Actions tab or automatically pull requests to `main`
+You can trigger it manually via the Actions tab or automatically with pull requests targeting the `main` branch
 
 - Checks out code
 - Sets up Java and Chrome
@@ -60,73 +60,34 @@ You can trigger it manually via the Actions tab or automatically pull requests t
 
 Workflow file is located at `.github/workflows/Run_tests.yml`
 
-## Framework
+## Framework Architecture
+
+<details>
+<summary>Click to expand directory structure</summary>
 
 ```text
-├── README.md
-├── defects
-│   ├── DEF-BOOKCART-001.md
-│   ├── DEF-BOOKCART-002.md
-│   ├── DEF-BOOKCART-003.md
-│   ├── DEF-BOOKCART-004.md
-│   ├── DEF-BOOKCART-005.md
-│   ├── DEF-BOOKCART-006.md
-│   ├── DEF-BOOKCART-007.md
-│   ├── DEF-BOOKCART-008.md
-│   └── DEF-BOOKCART-009.md
-├── manual
-│   └── USER-REGISTRATION.md
-├── pom.xml
-├── src
-│   ├── main
-│   │   ├── java
-│   │   └── resources
-│   └── test
-│       ├── java
-│       │   ├── cucumberoptions
-│       │   │   └── JunitTestRunnerTest.java
-│       │   ├── pageobjects
-│       │   │   ├── BookDetailsPage.java
-│       │   │   ├── CheckoutPage.java
-│       │   │   ├── HomePage.java
-│       │   │   ├── LoginPage.java
-│       │   │   ├── MyOrderDetailsPage.java
-│       │   │   ├── PageObjectManager.java
-│       │   │   ├── RegisterPage.java
-│       │   │   ├── ShoppingCartPage.java
-│       │   │   └── WishlistPage.java
-│       │   ├── stepdefinitions
-│       │   │   ├── BookDetailsPageStepDefinition.java
-│       │   │   ├── CheckoutPageStepDefinition.java
-│       │   │   ├── HomePageStepDefinition.java
-│       │   │   ├── Hooks.java
-│       │   │   ├── LoginPageStepDefinition.java
-│       │   │   ├── MyOrderDetailsPageStepDefinition.java
-│       │   │   ├── RegisterPageStepDefinition.java
-│       │   │   ├── ShoppingCartPageStepDefinition.java
-│       │   │   ├── UserFlowStepDefinition.java
-│       │   │   └── WishlistPageStepDefinition.java
-│       │   └── utils
-│       │       ├── GenericUtils.java
-│       │       ├── TestBase.java
-│       │       └── TestContextSetup.java
-│       └── resources
-│           ├── extent.properties
-│           ├── features
-│           │   ├── addItemToCart.feature
-│           │   ├── checkout.feature
-│           │   ├── filterBooks.feature
-│           │   ├── getBookDetails.feature
-│           │   ├── login.feature
-│           │   ├── logout.feature
-│           │   ├── register.feature
-│           │   ├── updateCart.feature
-│           │   ├── viewCartContents.feature
-│           │   └── wishlist.feature
-│           └── global.properties
-└── test-output
-
+├── README.md                     # Project overview and instructions
+├── defects/                      # Defect reports 
+├── manual/                       # Manual test cases 
+├── pom.xml                       # Maven configuration file
+├── src/
+│   ├── main/
+│   │   ├── java/                
+│   │   └── resources/           
+│   └── test/
+│       ├── java/
+│       │   ├── cucumberoptions/  # JUnit runner
+│       │   ├── pageobjects/      # POM classes (BookDetailsPage, HomePage, etc.)
+│       │   ├── stepdefinitions/  # Cucumber step defs linked to features
+│       │   └── utils/            # Shared utilities and context setup
+│       └── resources/
+│           ├── features/         # Feature files (BDD scenarios)
+│           ├── global.properties # Test environment configs
+│           └── extent.properties # Report configurations
+├── test-output/                  # Generated Extent reports 
 ```
+</details> 
+
 ## Contributing
 1. Clone the repository.
 2. Create a feature branch:
