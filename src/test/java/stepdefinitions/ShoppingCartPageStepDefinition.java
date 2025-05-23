@@ -47,6 +47,11 @@ public class ShoppingCartPageStepDefinition {
         shoppingCartPage.clickClearButton();
     }
 
+    @When("I click the CheckOut button")
+    public void iClickTheCheckOutButton() {
+        shoppingCartPage.clickCheckoutButton();
+    }
+
     @Then("I should be redirected to the Shopping Cart page")
     public void iShouldBeRedirectedToTheShoppingCartPage() {
         boolean titleMatches = testContextSetup.genericUtils.waitForTitle("Shopping Cart", 3);

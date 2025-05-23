@@ -136,7 +136,10 @@ public class HomePage {
 
     public void clickAddToCartButton() {
         driver.findElement(firstAutocompleteOption).click();
-        driver.findElement(addToCartButton).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.presenceOfElementLocated(addToCartButton));
+
+        clickWithRetry(addToCartButton);
     }
 
     public String getToastMessage() {
@@ -159,7 +162,10 @@ public class HomePage {
 
     public void clickWishlistIcon() {
         driver.findElement(firstAutocompleteOption).click();
-        driver.findElement(wishlistIcon).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.presenceOfElementLocated(wishlistIcon));
+
+        clickWithRetry(wishlistIcon);
     }
 
     public int getWishlistQuantity() {
@@ -172,5 +178,24 @@ public class HomePage {
 
     public String getBookTitle() {
         return driver.findElement(title).getText();
+    }
+
+    private void clickWithRetry(By locator) {
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                WebElement element = driver.findElement(locator);
+                new WebDriverWait(driver, Duration.ofSeconds(5))
+                        .until(ExpectedConditions.elementToBeClickable(element))
+                        .click();
+                return; // success
+            } catch (StaleElementReferenceException e) {
+                attempts++;
+                try {
+                    Thread.sleep(500); // brief pause before retry
+                } catch (InterruptedException ignored) {}
+            }
+        }
+        throw new RuntimeException("Failed to click element after multiple attempts due to StaleElementReferenceException");
     }
 }

@@ -14,7 +14,7 @@ public class ShoppingCartPage {
     By price = By.cssSelector("td.mat-column-price");
     By quantity = By.cssSelector("td.mat-column-quantity > div > div:nth-child(2)");
     By total = By.cssSelector("td.mat-column-total");
-    By checkoutButton = By.cssSelector("td.mat-column-action button span.mdc-button__label");
+    By checkoutButton = By.xpath("//button[.//span[text()=' CheckOut ']]");
     By clearButton = By.xpath("//button[.//span[text()=' Clear cart ']]");
     By decrementButton = By.xpath("//mat-icon[normalize-space()='remove_circle']/ancestor::button");
     By incrementButton = By.xpath("//mat-icon[normalize-space()='add_circle']/ancestor::button");
@@ -120,5 +120,9 @@ public class ShoppingCartPage {
 
     public By getEmptyCartMessageLocator() {
         return emptyCartMessage;
+    }
+
+    public void clickCheckoutButton() {
+        driver.findElement(checkoutButton).click();
     }
 }
