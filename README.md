@@ -30,7 +30,7 @@ Additionally, the tests can be run in various browsers including chrome, firefox
    ```sh
    mvn clean install  
    ```
-3. (optional) Open `src/main/resources/global.properties` and set preferred browser (default is chrome)
+3. (optional) Open `src/test/resources/global.properties` and set preferred browser (default is chrome)
 
 
 ## Running The Tests
@@ -47,7 +47,7 @@ Additionally, the tests can be run in various browsers including chrome, firefox
   mvn test -Dbrowser=chrome
   ```
 ## Test Reports
-Cucumber Extent reports are generated automatically under `test-output/` folder
+Cucumber Extent reports are generated automatically under the `test-output/` folder
 
 ## CI Integration
 This framework is integrated with GitHub Actions.
